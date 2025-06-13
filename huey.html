@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuxis Giant - Huey | Worry Bead Records</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .header:hover,
+        .header.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Show header briefly on page load, then fade */
+        .header.initial {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Hover area to trigger header visibility */
+        .header-trigger {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 120px;
+            z-index: 999;
+        }
+        
+        .header-trigger:hover + .header {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .header h1 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: #333;
+        }
+        
+        .experience-frame {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+        
+        .mobile-notice {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-notice {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-trigger"></div>
+    <div class="header initial" id="header">
+        <h1>Tuxis Giant - "Huey"</h1>
+        <p>Use WASD to move • Click/drag to look around</p>
+        <a href="index.html" class="back-link">← Back to Worry Bead Records</a>
+    </div>
+    
+    <iframe 
+        src="https://fennmacon.github.io/tuxis/" 
+        class="experience-frame"
+        title="Tuxis Giant Huey Interactive Experience"
+        allowfullscreen>
+    </iframe>
+    
+    <div class="mobile-notice">
+        📱 For the best experience on mobile, make sure your phone is off silent mode
+    </div>
+
+    <script>
+        // Show header for 3 seconds on load, then fade out
+        setTimeout(() => {
+            document.getElementById('header').classList.remove('initial');
+        }, 3000);
+    </script>
+</body>
+</html> 
