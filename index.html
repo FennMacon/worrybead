@@ -35,81 +35,308 @@
 
         <section id="news" class="section">
             <h2>News</h2>
-            <div class="news-grid">
-                <!-- News items will be managed through the CMS -->
-                <div class="cms-notice">
-                    <p>📝 News content is now managed through the <a href="/admin/" target="_blank">CMS Admin</a></p>
-                    <p>This section will be populated by the content management system.</p>
-                </div>
+            <div class="news-grid" id="news-container">
+                <div class="loading">Loading news...</div>
             </div>
         </section>
 
         <section id="releases" class="section">
             <h2>Releases</h2>
-            <div class="releases-grid">
-                <!-- Releases will be managed through the CMS -->
-                <div class="cms-notice">
-                    <p>💿 Releases are now managed through the <a href="/admin/" target="_blank">CMS Admin</a></p>
-                    <p>This section will be populated by the content management system.</p>
-                </div>
+            <div class="releases-grid" id="releases-container">
+                <div class="loading">Loading releases...</div>
             </div>
         </section>
 
         <section id="videos" class="section">
             <h2>Videos</h2>
-            <div class="videos-grid">
-                <!-- Videos will be managed through the CMS -->
-                <div class="cms-notice">
-                    <p>🎥 Videos are now managed through the <a href="/admin/" target="_blank">CMS Admin</a></p>
-                    <p>This section will be populated by the content management system.</p>
-                </div>
+            <div class="videos-grid" id="videos-container">
+                <div class="loading">Loading videos...</div>
             </div>
         </section>
 
         <section id="press" class="section">
             <h2>Press</h2>
-            <div class="press-grid">
-                <!-- Press coverage will be managed through the CMS -->
-                <div class="cms-notice">
-                    <p>📰 Press coverage is now managed through the <a href="/admin/" target="_blank">CMS Admin</a></p>
-                    <p>This section will be populated by the content management system.</p>
-                </div>
+            <div class="press-grid" id="press-container">
+                <div class="loading">Loading press...</div>
             </div>
         </section>
 
         <section id="about" class="section">
-            <h2>About Worry Bead Records</h2>
-            <p>Worry Bead Records is an independent record label based in Queens, New York. We're dedicated to supporting and promoting emerging artists while creating meaningful connections through music.</p>
-            <p class="art-credits">Hands by Louis Roe • Stars by Sami Martasian</p>
+            <h2>About</h2>
+            <div id="about-content">
+                <div class="loading">Loading about...</div>
+            </div>
         </section>
 
         <section id="contact" class="section">
             <h2>Contact</h2>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:worrybeadrecs@gmail.com">worrybeadrecs@gmail.com</a></p>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/worrybeadrecs" target="_blank">Instagram</a>
-                    <a href="https://x.com/worrybeadrecs" target="_blank">Twitter</a>
-                    <a href="https://worrybeadrecs.bandcamp.com" target="_blank">Bandcamp</a>
-                </div>
+            <div id="contact-content">
+                <div class="loading">Loading contact...</div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Worry Bead Records. All rights reserved.</p>
+        <p>&copy; 2025 Worry Bead Records. All rights reserved.</p>
+        <p>Logo by Louis Roe, Banner by Sami Martasian</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
+        // Content management system integration
+        class CMSLoader {
+            constructor() {
+                this.baseUrl = window.location.origin;
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await Promise.all([
+                        this.loadNews(),
+                        this.loadReleases(),
+                        this.loadVideos(),
+                        this.loadPress(),
+                        this.loadAbout(),
+                        this.loadContact()
+                    ]);
+                } catch (error) {
+                    console.error('Error loading CMS content:', error);
+                }
+            }
+
+            async fetchMarkdownFile(path) {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`Failed to fetch ${path}`);
+                    return await response.text();
+                } catch (error) {
+                    console.error(`Error fetching ${path}:`, error);
+                    return null;
+                }
+            }
+
+            parseMarkdown(content) {
+                const lines = content.split('\n');
+                const frontMatterEnd = lines.findIndex((line, index) => index > 0 && line.trim() === '---');
+                
+                if (frontMatterEnd === -1) return { frontMatter: {}, content: content };
+                
+                const frontMatterLines = lines.slice(1, frontMatterEnd);
+                const contentLines = lines.slice(frontMatterEnd + 1);
+                
+                const frontMatter = {};
+                frontMatterLines.forEach(line => {
+                    const [key, ...valueParts] = line.split(':');
+                    if (key && valueParts.length) {
+                        frontMatter[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+                    }
+                });
+                
+                return {
+                    frontMatter,
+                    content: contentLines.join('\n').trim()
+                };
+            }
+
+            async loadNews() {
+                const newsFiles = [
+                    '_news/2025-08-15-tuxis-giant-releases-you-wont-remember-this.md',
+                    '_news/2025-05-02-true-names-compilation-raises-over-1500.md',
+                    '_news/2025-03-06-tuxis-giant-announces-summer-tour.md'
+                ];
+
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '';
+
+                for (const file of newsFiles) {
+                    const content = await this.fetchMarkdownFile(file);
+                    if (content) {
+                        const { frontMatter, content: body } = this.parseMarkdown(content);
+                        const newsItem = this.createNewsItem(frontMatter, body);
+                        newsContainer.appendChild(newsItem);
+                    }
+                }
+            }
+
+            createNewsItem(frontMatter, content) {
+                const article = document.createElement('article');
+                article.className = frontMatter.featured === 'true' ? 'news-item featured' : 'news-item';
+                
+                article.innerHTML = `
+                    <div class="news-date">${frontMatter.date}</div>
+                    <h3>${frontMatter.title}</h3>
+                    <p>${frontMatter.excerpt || marked.parse(content).replace(/<[^>]*>/g, '').substring(0, 150) + '...'}</p>
+                    ${frontMatter.link ? `<a href="${frontMatter.link}" target="_blank" class="news-link">Read More</a>` : ''}
+                `;
+                
+                return article;
+            }
+
+            async loadReleases() {
+                const releaseFiles = [
+                    '_releases/true-names-a-benefit-for-trans-youth.md',
+                    '_releases/you-wont-remember-this.md'
+                ];
+
+                const releasesContainer = document.getElementById('releases-container');
+                releasesContainer.innerHTML = '';
+
+                for (const file of releaseFiles) {
+                    const content = await this.fetchMarkdownFile(file);
+                    if (content) {
+                        const { frontMatter, content: body } = this.parseMarkdown(content);
+                        const releaseCard = this.createReleaseCard(frontMatter, body);
+                        releasesContainer.appendChild(releaseCard);
+                    }
+                }
+            }
+
+            createReleaseCard(frontMatter, content) {
+                const div = document.createElement('div');
+                div.className = 'release-card';
+                
+                div.innerHTML = `
+                    <div class="release-content">
+                        <h3>${frontMatter.title}</h3>
+                        <p class="release-date">${frontMatter.date}</p>
+                        <p class="release-description">${frontMatter.description}</p>
+                    </div>
+                    ${frontMatter.bandcamp_embed ? `
+                        <div class="bandcamp-embed">
+                            <iframe style="border: 0; width: 100%; height: 470px;" src="${frontMatter.bandcamp_embed}" seamless>
+                                <a href="${frontMatter.bandcamp_link}">${frontMatter.title}</a>
+                            </iframe>
+                        </div>
+                    ` : ''}
+                    ${frontMatter.bandcamp_link ? `<a href="${frontMatter.bandcamp_link}" target="_blank" class="button">View on Bandcamp</a>` : ''}
+                `;
+                
+                return div;
+            }
+
+            async loadVideos() {
+                const videoFiles = [
+                    '_videos/tuxis-giant-silver-cup.md',
+                    '_videos/tuxis-giant-huey-interactive.md'
+                ];
+
+                const videosContainer = document.getElementById('videos-container');
+                videosContainer.innerHTML = '';
+
+                for (const file of videoFiles) {
+                    const content = await this.fetchMarkdownFile(file);
+                    if (content) {
+                        const { frontMatter, content: body } = this.parseMarkdown(content);
+                        const videoCard = this.createVideoCard(frontMatter, body);
+                        videosContainer.appendChild(videoCard);
+                    }
+                }
+            }
+
+            createVideoCard(frontMatter, content) {
+                const div = document.createElement('div');
+                div.className = 'video-card';
+                
+                let embedContent = '';
+                if (frontMatter.youtube_id) {
+                    embedContent = `
+                        <div class="video-embed">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/${frontMatter.youtube_id}" 
+                                title="YouTube video player" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    `;
+                } else if (frontMatter.interactive_link) {
+                    embedContent = `
+                        <div class="video-link">
+                            <a href="${frontMatter.interactive_link}" target="_blank" class="experience-button">Launch Interactive Experience</a>
+                        </div>
+                    `;
+                }
+                
+                div.innerHTML = `
+                    <h3>${frontMatter.title}</h3>
+                    <p class="video-description">${frontMatter.description}</p>
+                    ${embedContent}
+                `;
+                
+                return div;
+            }
+
+            async loadPress() {
+                const pressFiles = [
+                    '_press/music-n-gear-interview.md',
+                    '_press/post-trash-review.md',
+                    '_press/marc-schuster-interview.md',
+                    '_press/flood-magazine-review.md'
+                ];
+
+                const pressContainer = document.getElementById('press-container');
+                pressContainer.innerHTML = '';
+
+                for (const file of pressFiles) {
+                    const content = await this.fetchMarkdownFile(file);
+                    if (content) {
+                        const { frontMatter, content: body } = this.parseMarkdown(content);
+                        const pressItem = this.createPressItem(frontMatter, body);
+                        pressContainer.appendChild(pressItem);
+                    }
+                }
+            }
+
+            createPressItem(frontMatter, content) {
+                const article = document.createElement('article');
+                article.className = 'press-item';
+                
+                article.innerHTML = `
+                    <h3>${frontMatter.publication}</h3>
+                    <p>${frontMatter.title}</p>
+                    <a href="${frontMatter.link}" target="_blank">Read More</a>
+                `;
+                
+                return article;
+            }
+
+            async loadAbout() {
+                const content = await this.fetchMarkdownFile('_data/about.md');
+                const aboutContainer = document.getElementById('about-content');
+                
+                if (content) {
+                    const { frontMatter, content: body } = this.parseMarkdown(content);
+                    aboutContainer.innerHTML = marked.parse(body);
+                } else {
+                    aboutContainer.innerHTML = `
+                        <p>Worry Bead Records is an independent record label based in Queens, New York, dedicated to supporting emerging artists and meaningful music.</p>
+                    `;
+                }
+            }
+
+            async loadContact() {
+                const content = await this.fetchMarkdownFile('_data/contact.md');
+                const contactContainer = document.getElementById('contact-content');
+                
+                if (content) {
+                    const { frontMatter, content: body } = this.parseMarkdown(content);
+                    contactContainer.innerHTML = marked.parse(body);
+                } else {
+                    contactContainer.innerHTML = `
+                        <p>Email: <a href="mailto:worrybeadrecs@gmail.com">worrybeadrecs@gmail.com</a></p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/worrybeadrecs/" target="_blank">Instagram</a>
+                            <a href="https://twitter.com/worrybeadrecs" target="_blank">Twitter/X</a>
+                            <a href="https://worrybeadrecs.bandcamp.com/" target="_blank">Bandcamp</a>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Initialize the CMS loader when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new CMSLoader();
         });
-      }
     </script>
 </body>
 </html> 

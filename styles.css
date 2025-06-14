@@ -463,7 +463,15 @@ footer {
     }
 }
 
-/* CMS Notice Styling */
+/* Loading States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* CMS Notice Styling - Updated for JavaScript integration */
 .cms-notice {
     background: #f0f8ff;
     border: 2px dashed #4a90e2;
@@ -486,4 +494,15 @@ footer {
 
 .cms-notice a:hover {
     text-decoration: underline;
+}
+
+/* Error States */
+.error-message {
+    background: #ffe6e6;
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    color: #cc0000;
+    margin: 1rem 0;
 } 
