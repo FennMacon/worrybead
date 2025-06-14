@@ -461,48 +461,4 @@ footer {
         max-height: unset;
         height: unset;
     }
-}
-
-/* Loading States */
-.loading {
-    text-align: center;
-    padding: 2rem;
-    color: #666;
-    font-style: italic;
-}
-
-/* CMS Notice Styling - Updated for JavaScript integration */
-.cms-notice {
-    background: #f0f8ff;
-    border: 2px dashed #4a90e2;
-    border-radius: 8px;
-    padding: 2rem;
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.cms-notice p {
-    margin-bottom: 0.5rem;
-    color: #2c5aa0;
-}
-
-.cms-notice a {
-    color: #1e4a8c;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.cms-notice a:hover {
-    text-decoration: underline;
-}
-
-/* Error States */
-.error-message {
-    background: #ffe6e6;
-    border: 2px solid #ff4444;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    color: #cc0000;
-    margin: 1rem 0;
 } 
