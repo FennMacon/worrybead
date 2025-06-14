@@ -1,13 +1,16 @@
 source "https://rubygems.org"
 
-# Use GitHub Pages gem which includes Jekyll and all compatible plugins
-gem "github-pages", group: :jekyll_plugins
+# Jekyll
+gem "jekyll", "~> 4.3.0"
 
-# Additional plugins
+# Jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll-sitemap"
 end
+
+# For Netlify builds
+gem "webrick", "~> 1.7"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
