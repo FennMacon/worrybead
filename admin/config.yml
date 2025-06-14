@@ -15,8 +15,9 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Link URL", name: "link_url", widget: "string", required: false}
+      - {label: "Link URL", name: "link", widget: "string", required: false}
       - {label: "Link Text", name: "link_text", widget: "string", default: "Read More"}
 
   - name: "releases"
@@ -27,10 +28,10 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Artist", name: "artist", widget: "string"}
-      - {label: "Release Date", name: "release_date", widget: "string"}
+      - {label: "Release Date", name: "date", widget: "datetime"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Bandcamp Embed Code", name: "bandcamp_embed", widget: "text"}
-      - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string"}
+      - {label: "Bandcamp Embed URL", name: "bandcamp_embed", widget: "string", required: false}
+      - {label: "Bandcamp Link", name: "bandcamp_link", widget: "string", required: false}
 
   - name: "videos"
     label: "Videos"
@@ -39,11 +40,10 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Video Type", name: "video_type", widget: "select", options: ["youtube", "interactive"]}
-      - {label: "YouTube Embed Code", name: "youtube_embed", widget: "text", required: false}
-      - {label: "Interactive URL", name: "interactive_url", widget: "string", required: false}
-      - {label: "Button Text", name: "button_text", widget: "string", required: false}
+      - {label: "YouTube Video ID", name: "youtube_id", widget: "string", required: false, hint: "Just the ID part from YouTube URL (e.g., 'dQw4w9WgXcQ')"}
+      - {label: "Interactive Link", name: "interactive_link", widget: "string", required: false}
 
   - name: "press"
     label: "Press"
@@ -53,7 +53,7 @@ collections:
     fields:
       - {label: "Publication", name: "publication", widget: "string"}
       - {label: "Article Title", name: "title", widget: "string"}
-      - {label: "URL", name: "url", widget: "string"}
+      - {label: "URL", name: "link", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
 
   - name: "settings"
@@ -63,13 +63,9 @@ collections:
         name: "about"
         file: "_data/about.yml"
         fields:
-          - {label: "About Text", name: "about_text", widget: "text"}
-          - {label: "Art Credits", name: "art_credits", widget: "string"}
+          - {label: "Content", name: "content", widget: "markdown"}
       - label: "Contact Info"
         name: "contact"
         file: "_data/contact.yml"
         fields:
-          - {label: "Email", name: "email", widget: "string"}
-          - {label: "Instagram URL", name: "instagram", widget: "string"}
-          - {label: "Twitter URL", name: "twitter", widget: "string"}
-          - {label: "Bandcamp URL", name: "bandcamp", widget: "string"} 
+          - {label: "Content", name: "content", widget: "markdown"} 

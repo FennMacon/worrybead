@@ -1,342 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worry Bead Records</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="img/logo.jpg" alt="Worry Bead Records Logo">
+---
+layout: default
+---
+
+<section class="hero">
+    <img src="{{ '/img/banner.jpeg' | relative_url }}" alt="Worry Bead Records Banner" class="banner">
+</section>
+
+<section id="news" class="section">
+    <h2>News</h2>
+    <div class="news-grid">
+        {% assign sorted_news = site.news | sort: 'date' | reverse %}
+        {% for news_item in sorted_news %}
+        <article class="news-item{% if news_item.featured %} featured{% endif %}">
+            <div class="news-date">{{ news_item.date | date: "%B %d, %Y" }}</div>
+            <h3>{{ news_item.title }}</h3>
+            <p>{{ news_item.excerpt | default: news_item.content | strip_html | truncate: 150 }}</p>
+            {% if news_item.link %}
+            <a href="{{ news_item.link }}" target="_blank" class="news-link">{{ news_item.link_text | default: "Read More" }}</a>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="releases" class="section">
+    <h2>Releases</h2>
+    <div class="releases-grid">
+        {% assign sorted_releases = site.releases | sort: 'date' | reverse %}
+        {% for release in sorted_releases %}
+        <div class="release-card">
+            <div class="release-content">
+                <h3>{{ release.title }}</h3>
+                <p class="release-date">{{ release.date | date: "%B %Y" }}</p>
+                <p class="release-description">{{ release.description }}</p>
             </div>
-            <ul class="nav-links">
-                <li><a href="#news">News</a></li>
-                <li><a href="#releases">Releases</a></li>
-                <li><a href="#videos">Videos</a></li>
-                <li><a href="#press">Press</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero">
-            <img src="img/banner.jpeg" alt="Worry Bead Records Banner" class="banner">
-        </section>
-
-        <section id="news" class="section">
-            <h2>News</h2>
-            <div class="news-grid" id="news-container">
-                <div class="loading">Loading news...</div>
+            {% if release.bandcamp_embed %}
+            <div class="bandcamp-embed">
+                <iframe style="border: 0; width: 100%; height: 470px;" src="{{ release.bandcamp_embed }}" seamless>
+                    <a href="{{ release.bandcamp_link }}">{{ release.title }}</a>
+                </iframe>
             </div>
-        </section>
+            {% endif %}
+            {% if release.bandcamp_link %}
+            <a href="{{ release.bandcamp_link }}" target="_blank" class="button">View on Bandcamp</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
-        <section id="releases" class="section">
-            <h2>Releases</h2>
-            <div class="releases-grid" id="releases-container">
-                <div class="loading">Loading releases...</div>
+<section id="videos" class="section">
+    <h2>Videos</h2>
+    <div class="videos-grid">
+        {% assign sorted_videos = site.videos | sort: 'date' | reverse %}
+        {% for video in sorted_videos %}
+        <div class="video-card">
+            <h3>{{ video.title }}</h3>
+            <p class="video-description">{{ video.description }}</p>
+            {% if video.youtube_id %}
+            <div class="video-embed">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{ video.youtube_id }}" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-        </section>
-
-        <section id="videos" class="section">
-            <h2>Videos</h2>
-            <div class="videos-grid" id="videos-container">
-                <div class="loading">Loading videos...</div>
+            {% elsif video.interactive_link %}
+            <div class="video-link">
+                <a href="{{ video.interactive_link }}" target="_blank" class="experience-button">Launch Interactive Experience</a>
             </div>
-        </section>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
-        <section id="press" class="section">
-            <h2>Press</h2>
-            <div class="press-grid" id="press-container">
-                <div class="loading">Loading press...</div>
+<section id="press" class="section">
+    <h2>Press</h2>
+    <div class="press-grid">
+        {% assign sorted_press = site.press | sort: 'date' | reverse %}
+        {% for press_item in sorted_press %}
+        <article class="press-item">
+            <h3>{{ press_item.publication }}</h3>
+            <p>{{ press_item.title }}</p>
+            <a href="{{ press_item.link }}" target="_blank">Read More</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="about" class="section">
+    <h2>About</h2>
+    <div id="about-content">
+        {% assign about_data = site.data.about %}
+        {% if about_data.content %}
+            {{ about_data.content | markdownify }}
+        {% else %}
+            <p>Worry Bead Records is an independent record label based in Queens, New York, dedicated to supporting emerging artists and meaningful music.</p>
+        {% endif %}
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <h2>Contact</h2>
+    <div id="contact-content">
+        {% assign contact_data = site.data.contact %}
+        {% if contact_data.content %}
+            {{ contact_data.content | markdownify }}
+        {% else %}
+            <p>Email: <a href="mailto:worrybeadrecs@gmail.com">worrybeadrecs@gmail.com</a></p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/worrybeadrecs/" target="_blank">Instagram</a>
+                <a href="https://twitter.com/worrybeadrecs" target="_blank">Twitter/X</a>
+                <a href="https://worrybeadrecs.bandcamp.com/" target="_blank">Bandcamp</a>
             </div>
-        </section>
-
-        <section id="about" class="section">
-            <h2>About</h2>
-            <div id="about-content">
-                <div class="loading">Loading about...</div>
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <h2>Contact</h2>
-            <div id="contact-content">
-                <div class="loading">Loading contact...</div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Worry Bead Records. All rights reserved.</p>
-        <p>Logo by Louis Roe, Banner by Sami Martasian</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        // Content management system integration
-        class CMSLoader {
-            constructor() {
-                this.baseUrl = window.location.origin;
-                this.init();
-            }
-
-            async init() {
-                try {
-                    await Promise.all([
-                        this.loadNews(),
-                        this.loadReleases(),
-                        this.loadVideos(),
-                        this.loadPress(),
-                        this.loadAbout(),
-                        this.loadContact()
-                    ]);
-                } catch (error) {
-                    console.error('Error loading CMS content:', error);
-                }
-            }
-
-            async fetchMarkdownFile(path) {
-                try {
-                    const response = await fetch(path);
-                    if (!response.ok) throw new Error(`Failed to fetch ${path}`);
-                    return await response.text();
-                } catch (error) {
-                    console.error(`Error fetching ${path}:`, error);
-                    return null;
-                }
-            }
-
-            parseMarkdown(content) {
-                const lines = content.split('\n');
-                const frontMatterEnd = lines.findIndex((line, index) => index > 0 && line.trim() === '---');
-                
-                if (frontMatterEnd === -1) return { frontMatter: {}, content: content };
-                
-                const frontMatterLines = lines.slice(1, frontMatterEnd);
-                const contentLines = lines.slice(frontMatterEnd + 1);
-                
-                const frontMatter = {};
-                frontMatterLines.forEach(line => {
-                    const [key, ...valueParts] = line.split(':');
-                    if (key && valueParts.length) {
-                        frontMatter[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
-                    }
-                });
-                
-                return {
-                    frontMatter,
-                    content: contentLines.join('\n').trim()
-                };
-            }
-
-            async loadNews() {
-                const newsFiles = [
-                    '_news/2025-08-15-tuxis-giant-releases-you-wont-remember-this.md',
-                    '_news/2025-05-02-true-names-compilation-raises-over-1500.md',
-                    '_news/2025-03-06-tuxis-giant-announces-summer-tour.md'
-                ];
-
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '';
-
-                for (const file of newsFiles) {
-                    const content = await this.fetchMarkdownFile(file);
-                    if (content) {
-                        const { frontMatter, content: body } = this.parseMarkdown(content);
-                        const newsItem = this.createNewsItem(frontMatter, body);
-                        newsContainer.appendChild(newsItem);
-                    }
-                }
-            }
-
-            createNewsItem(frontMatter, content) {
-                const article = document.createElement('article');
-                article.className = frontMatter.featured === 'true' ? 'news-item featured' : 'news-item';
-                
-                article.innerHTML = `
-                    <div class="news-date">${frontMatter.date}</div>
-                    <h3>${frontMatter.title}</h3>
-                    <p>${frontMatter.excerpt || marked.parse(content).replace(/<[^>]*>/g, '').substring(0, 150) + '...'}</p>
-                    ${frontMatter.link ? `<a href="${frontMatter.link}" target="_blank" class="news-link">Read More</a>` : ''}
-                `;
-                
-                return article;
-            }
-
-            async loadReleases() {
-                const releaseFiles = [
-                    '_releases/true-names-a-benefit-for-trans-youth.md',
-                    '_releases/you-wont-remember-this.md'
-                ];
-
-                const releasesContainer = document.getElementById('releases-container');
-                releasesContainer.innerHTML = '';
-
-                for (const file of releaseFiles) {
-                    const content = await this.fetchMarkdownFile(file);
-                    if (content) {
-                        const { frontMatter, content: body } = this.parseMarkdown(content);
-                        const releaseCard = this.createReleaseCard(frontMatter, body);
-                        releasesContainer.appendChild(releaseCard);
-                    }
-                }
-            }
-
-            createReleaseCard(frontMatter, content) {
-                const div = document.createElement('div');
-                div.className = 'release-card';
-                
-                div.innerHTML = `
-                    <div class="release-content">
-                        <h3>${frontMatter.title}</h3>
-                        <p class="release-date">${frontMatter.date}</p>
-                        <p class="release-description">${frontMatter.description}</p>
-                    </div>
-                    ${frontMatter.bandcamp_embed ? `
-                        <div class="bandcamp-embed">
-                            <iframe style="border: 0; width: 100%; height: 470px;" src="${frontMatter.bandcamp_embed}" seamless>
-                                <a href="${frontMatter.bandcamp_link}">${frontMatter.title}</a>
-                            </iframe>
-                        </div>
-                    ` : ''}
-                    ${frontMatter.bandcamp_link ? `<a href="${frontMatter.bandcamp_link}" target="_blank" class="button">View on Bandcamp</a>` : ''}
-                `;
-                
-                return div;
-            }
-
-            async loadVideos() {
-                const videoFiles = [
-                    '_videos/tuxis-giant-silver-cup.md',
-                    '_videos/tuxis-giant-huey-interactive.md'
-                ];
-
-                const videosContainer = document.getElementById('videos-container');
-                videosContainer.innerHTML = '';
-
-                for (const file of videoFiles) {
-                    const content = await this.fetchMarkdownFile(file);
-                    if (content) {
-                        const { frontMatter, content: body } = this.parseMarkdown(content);
-                        const videoCard = this.createVideoCard(frontMatter, body);
-                        videosContainer.appendChild(videoCard);
-                    }
-                }
-            }
-
-            createVideoCard(frontMatter, content) {
-                const div = document.createElement('div');
-                div.className = 'video-card';
-                
-                let embedContent = '';
-                if (frontMatter.youtube_id) {
-                    embedContent = `
-                        <div class="video-embed">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/${frontMatter.youtube_id}" 
-                                title="YouTube video player" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    `;
-                } else if (frontMatter.interactive_link) {
-                    embedContent = `
-                        <div class="video-link">
-                            <a href="${frontMatter.interactive_link}" target="_blank" class="experience-button">Launch Interactive Experience</a>
-                        </div>
-                    `;
-                }
-                
-                div.innerHTML = `
-                    <h3>${frontMatter.title}</h3>
-                    <p class="video-description">${frontMatter.description}</p>
-                    ${embedContent}
-                `;
-                
-                return div;
-            }
-
-            async loadPress() {
-                const pressFiles = [
-                    '_press/music-n-gear-interview.md',
-                    '_press/post-trash-review.md',
-                    '_press/marc-schuster-interview.md',
-                    '_press/flood-magazine-review.md'
-                ];
-
-                const pressContainer = document.getElementById('press-container');
-                pressContainer.innerHTML = '';
-
-                for (const file of pressFiles) {
-                    const content = await this.fetchMarkdownFile(file);
-                    if (content) {
-                        const { frontMatter, content: body } = this.parseMarkdown(content);
-                        const pressItem = this.createPressItem(frontMatter, body);
-                        pressContainer.appendChild(pressItem);
-                    }
-                }
-            }
-
-            createPressItem(frontMatter, content) {
-                const article = document.createElement('article');
-                article.className = 'press-item';
-                
-                article.innerHTML = `
-                    <h3>${frontMatter.publication}</h3>
-                    <p>${frontMatter.title}</p>
-                    <a href="${frontMatter.link}" target="_blank">Read More</a>
-                `;
-                
-                return article;
-            }
-
-            async loadAbout() {
-                const content = await this.fetchMarkdownFile('_data/about.md');
-                const aboutContainer = document.getElementById('about-content');
-                
-                if (content) {
-                    const { frontMatter, content: body } = this.parseMarkdown(content);
-                    aboutContainer.innerHTML = marked.parse(body);
-                } else {
-                    aboutContainer.innerHTML = `
-                        <p>Worry Bead Records is an independent record label based in Queens, New York, dedicated to supporting emerging artists and meaningful music.</p>
-                    `;
-                }
-            }
-
-            async loadContact() {
-                const content = await this.fetchMarkdownFile('_data/contact.md');
-                const contactContainer = document.getElementById('contact-content');
-                
-                if (content) {
-                    const { frontMatter, content: body } = this.parseMarkdown(content);
-                    contactContainer.innerHTML = marked.parse(body);
-                } else {
-                    contactContainer.innerHTML = `
-                        <p>Email: <a href="mailto:worrybeadrecs@gmail.com">worrybeadrecs@gmail.com</a></p>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/worrybeadrecs/" target="_blank">Instagram</a>
-                            <a href="https://twitter.com/worrybeadrecs" target="_blank">Twitter/X</a>
-                            <a href="https://worrybeadrecs.bandcamp.com/" target="_blank">Bandcamp</a>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Initialize the CMS loader when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new CMSLoader();
-        });
-    </script>
-</body>
-</html> 
+        {% endif %}
+    </div>
+</section> 
