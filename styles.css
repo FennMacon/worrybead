@@ -461,4 +461,29 @@ footer {
         max-height: unset;
         height: unset;
     }
+}
+
+/* CMS Notice Styling */
+.cms-notice {
+    background: #f0f8ff;
+    border: 2px dashed #4a90e2;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.cms-notice p {
+    margin-bottom: 0.5rem;
+    color: #2c5aa0;
+}
+
+.cms-notice a {
+    color: #1e4a8c;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.cms-notice a:hover {
+    text-decoration: underline;
 } 
