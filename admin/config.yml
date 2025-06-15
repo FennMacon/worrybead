@@ -1,0 +1,78 @@
+backend:
+  name: github
+  repo: worrybeadrecs/worrybead # Replace with your actual GitHub username/repo
+  branch: main
+
+media_folder: "img"
+public_folder: "/img"
+
+collections:
+  - name: "news"
+    label: "News"
+    folder: "_news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Link Text", name: "link_text", widget: "string", default: "Read More"}
+
+  - name: "releases"
+    label: "Releases"
+    folder: "_releases"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Release Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Bandcamp Embed Code", name: "bandcamp_embed", widget: "text", hint: "Paste the full iframe embed code from Bandcamp"}
+      - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+
+  - name: "videos"
+    label: "Videos"
+    folder: "_videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Song", name: "song", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Video Type", name: "video_type", widget: "select", options: ["youtube", "interactive"]}
+      - {label: "YouTube Embed Code", name: "youtube_embed", widget: "text", required: false, hint: "For YouTube videos only"}
+      - {label: "Interactive Link", name: "interactive_link", widget: "string", required: false, hint: "For interactive experiences only"}
+      - {label: "Button Text", name: "button_text", widget: "string", default: "Watch Video", required: false}
+
+  - name: "press"
+    label: "Press"
+    folder: "_press"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Publication", name: "publication", widget: "string"}
+      - {label: "Article Title", name: "title", widget: "string"}
+      - {label: "URL", name: "url", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "about"
+        label: "About Page"
+        file: "_data/about.yml"
+        fields:
+          - {label: "About Text", name: "content", widget: "text"}
+          - {label: "Art Credits", name: "art_credits", widget: "string"}
+      - name: "contact"
+        label: "Contact Info"
+        file: "_data/contact.yml"
+        fields:
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Instagram URL", name: "instagram", widget: "string"}
+          - {label: "Twitter URL", name: "twitter", widget: "string"}
+          - {label: "Bandcamp URL", name: "bandcamp", widget: "string"} 

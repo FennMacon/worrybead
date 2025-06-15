@@ -1,0 +1,29 @@
+title: Worry Bead Records
+description: Independent record label based in Queens, New York
+baseurl: ""
+url: "https://worrybeadrecs.github.io"
+
+# Build settings
+markdown: kramdown
+permalink: /:categories/:title/
+
+# Collections
+collections:
+  news:
+    output: false
+  releases:
+    output: false
+  videos:
+    output: false
+  press:
+    output: false
+
+# Plugins
+plugins:
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - README.md
+  - .gitignore
+  - update-guide.md 
