@@ -2,8 +2,6 @@ backend:
   name: github
   repo: fennmacon/worrybead
   branch: main
-  base_url: https://decapcms-oauth.netlify.app
-  auth_endpoint: auth
 
 media_folder: "img"
 public_folder: "/img"
