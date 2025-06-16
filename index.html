@@ -92,7 +92,10 @@ layout: default
                 {% for press_item in sorted_press %}
                 <article class="press-item">
                     <h3>{{ press_item.publication }}</h3>
-                    <p>{{ press_item.title }}</p>
+                    <p><strong>{{ press_item.title }}</strong></p>
+                    {% if press_item.excerpt %}
+                    <p>{{ press_item.excerpt }}</p>
+                    {% endif %}
                     <a href="{{ press_item.url }}" target="_blank">Read More</a>
                 </article>
                 {% endfor %}
