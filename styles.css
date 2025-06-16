@@ -6,27 +6,45 @@
 }
 
 :root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #2d2d2d;
-    --accent-color: #ff6b6b;
-    --accent-secondary: #4ecdc4;
+    --primary-color: #2d2d2d;
+    --secondary-color: #4a4a4a;
+    
+    /* Trans pride inspired colors - subtle pastels */
+    --trans-blue: #55cdfc;
+    --trans-pink: #f7a8b8;
+    --trans-white: #ffffff;
+    
+    /* Non-binary pride inspired colors */
+    --nb-yellow: #fcf434;
+    --nb-purple: #9c59d1;
+    
+    /* Theme colors using pride palette */
+    --accent-primary: #55cdfc;    /* trans blue */
+    --accent-secondary: #f7a8b8;  /* trans pink */
+    --accent-tertiary: #9c59d1;   /* nb purple */
+    --accent-warm: #fcf434;       /* nb yellow */
+    
     --text-light: #666;
-    --text-dark: #1a1a1a;
+    --text-dark: #2d2d2d;
     --background-light: #fafafa;
     --background-card: #ffffff;
-    --border-light: #e5e5e5;
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-accent: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
-    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.07);
-    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
-    --shadow-strong: 0 15px 35px rgba(0, 0, 0, 0.15);
+    --border-light: #e8e8e8;
+    
+    /* Subtle gradients using pride colors */
+    --gradient-primary: linear-gradient(135deg, #55cdfc 0%, #f7a8b8 100%);
+    --gradient-accent: linear-gradient(135deg, #f7a8b8 0%, #9c59d1 100%);
+    --gradient-background: linear-gradient(135deg, #fefefe 0%, #f8fffe 50%, #fef8ff 100%);
+    
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-strong: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.7;
     color: var(--text-dark);
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--gradient-background);
     min-height: 100vh;
 }
 
@@ -40,7 +58,6 @@ header {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-light);
     z-index: 1000;
-    transition: all 0.3s ease;
 }
 
 nav {
@@ -55,11 +72,6 @@ nav {
 .logo img {
     height: 45px;
     width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
 }
 
 .nav-links {
@@ -75,7 +87,7 @@ nav {
     font-size: 0.95rem;
     letter-spacing: 0.025em;
     position: relative;
-    transition: all 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .nav-links a::after {
@@ -86,7 +98,7 @@ nav {
     width: 0;
     height: 2px;
     background: var(--gradient-accent);
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
 }
 
 .nav-links a:hover::after {
@@ -94,7 +106,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
+    color: var(--accent-primary);
 }
 
 /* Hero Section */
@@ -109,12 +121,6 @@ nav {
     width: 100%;
     height: auto;
     display: block;
-    filter: brightness(0.9) contrast(1.1);
-    transition: filter 0.3s ease;
-}
-
-.banner:hover {
-    filter: brightness(1) contrast(1.2);
 }
 
 /* Main Content */
@@ -167,8 +173,7 @@ h2::after {
 .release-card {
     background: var(--background-card);
     padding: 2.5rem;
-    border-radius: 16px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
     box-shadow: var(--shadow-light);
     display: flex;
     flex-direction: column;
@@ -176,29 +181,7 @@ h2::after {
     max-width: 450px;
     border: 1px solid var(--border-light);
     position: relative;
-    overflow: hidden;
-}
-
-.release-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.release-card:hover::before {
-    transform: scaleX(1);
-}
-
-.release-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-strong);
-    border-color: var(--accent-color);
+    border-top: 3px solid var(--accent-primary);
 }
 
 .release-card h3 {
@@ -242,10 +225,10 @@ h2::after {
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 8px;
     margin-bottom: 1.5rem;
     background: #000;
-    box-shadow: var(--shadow-medium);
+    box-shadow: var(--shadow-light);
 }
 
 .video-embed iframe {
@@ -261,7 +244,7 @@ h2::after {
     margin: 2rem 0;
     width: 100%;
     background: var(--background-card);
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-light);
@@ -280,8 +263,8 @@ h2::after {
     background: var(--gradient-accent);
     color: white;
     text-decoration: none;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    border-radius: 25px;
+    transition: opacity 0.2s ease;
     margin-top: 1.5rem;
     text-align: center;
     font-weight: 600;
@@ -289,28 +272,10 @@ h2::after {
     letter-spacing: 0.025em;
     text-transform: uppercase;
     box-shadow: var(--shadow-light);
-    position: relative;
-    overflow: hidden;
-}
-
-.button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.button:hover::before {
-    left: 100%;
 }
 
 .button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
+    opacity: 0.9;
 }
 
 /* News Section */
@@ -326,37 +291,14 @@ h2::after {
     background: var(--background-card);
     padding: 2rem;
     border-radius: 12px;
-    transition: all 0.3s ease;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-light);
-    position: relative;
-    overflow: hidden;
-}
-
-.news-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--gradient-primary);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.news-item:hover::after {
-    transform: scaleY(1);
+    border-left: 4px solid var(--accent-secondary);
 }
 
 .news-item.featured {
-    border-color: var(--accent-color);
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.02) 0%, rgba(255, 167, 38, 0.02) 100%);
-}
-
-.news-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
+    border-left-color: var(--accent-tertiary);
+    background: linear-gradient(135deg, rgba(247, 168, 184, 0.02) 0%, rgba(156, 89, 209, 0.02) 100%);
 }
 
 .news-date {
@@ -383,27 +325,17 @@ h2::after {
 }
 
 .news-link {
-    color: var(--accent-color);
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    position: relative;
-}
-
-.news-link::after {
-    content: '→';
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-}
-
-.news-link:hover::after {
-    transform: translateX(4px);
+    transition: color 0.2s ease;
 }
 
 .news-link:hover {
-    color: var(--primary-color);
+    color: var(--accent-tertiary);
 }
 
 /* Press Section */
@@ -419,37 +351,15 @@ h2::after {
     padding: 2rem;
     background: var(--background-card);
     border-radius: 12px;
-    transition: all 0.3s ease;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-light);
-    position: relative;
-    overflow: hidden;
-}
-
-.press-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
-    transition: width 0.3s ease;
-}
-
-.press-item:hover::before {
-    width: 100%;
-}
-
-.press-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
+    border-top: 3px solid var(--accent-secondary);
 }
 
 .press-item h3 {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
-    color: var(--accent-secondary);
+    color: var(--accent-tertiary);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -473,18 +383,17 @@ h2::after {
 }
 
 .press-item a {
-    color: var(--accent-color);
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    position: relative;
-    z-index: 2;
+    transition: color 0.2s ease;
 }
 
 .press-item a:hover {
-    color: var(--primary-color);
+    color: var(--accent-secondary);
 }
 
 /* Videos Section */
@@ -498,16 +407,11 @@ h2::after {
 
 .video-card {
     background: var(--background-card);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-light);
-}
-
-.video-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-strong);
+    border-top: 3px solid var(--accent-tertiary);
 }
 
 .video-card h3 {
@@ -529,15 +433,19 @@ h2::after {
 
 .video-link {
     display: block;
-    color: var(--accent-color);
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 600;
     padding: 1rem 1.5rem;
     background: var(--background-light);
     margin: 1rem;
-    border-radius: 8px;
+    border-radius: 6px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease;
+}
+
+.video-link:hover {
+    background-color: rgba(85, 205, 252, 0.1);
 }
 
 .experience-button {
@@ -546,18 +454,17 @@ h2::after {
     background: var(--gradient-primary);
     color: white;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 25px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    transition: all 0.3s ease;
+    transition: opacity 0.2s ease;
     box-shadow: var(--shadow-light);
     margin: 1rem 1.5rem 1.5rem;
 }
 
 .experience-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
+    opacity: 0.9;
 }
 
 /* About Section */
@@ -579,7 +486,7 @@ h2::after {
     padding: 1.5rem;
     background: var(--background-light);
     border-radius: 8px;
-    border-left: 4px solid var(--accent-secondary);
+    border-left: 4px solid var(--accent-warm);
 }
 
 /* Contact Section */
@@ -590,14 +497,14 @@ h2::after {
 }
 
 .contact-info a {
-    color: var(--accent-color);
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .contact-info a:hover {
-    color: var(--primary-color);
+    color: var(--accent-secondary);
 }
 
 .social-links {
@@ -614,13 +521,12 @@ h2::after {
     color: white;
     text-decoration: none;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: opacity 0.2s ease;
     box-shadow: var(--shadow-light);
 }
 
 .social-links a:hover {
-    transform: translateY(-2px) scale(1.1);
-    box-shadow: var(--shadow-medium);
+    opacity: 0.9;
 }
 
 /* Footer */
