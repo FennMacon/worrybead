@@ -94,13 +94,10 @@ layout: default
                     <h3>{{ press_item.publication }}</h3>
                     <p><strong>{{ press_item.title }}</strong></p>
                     {% if press_item.excerpt %}
-                    <p>{{ press_item.excerpt }}</p>
+                    {% assign excerpt = press_item.excerpt %}
+                    <p>{{ excerpt }}</p>
                     {% endif %}
-                    {% if press_item.url contains "http" %}
-                    <a href="{{ press_item.url }}" target="_blank" rel="noopener">Read More</a>
-                    {% else %}
-                    <a href="https://{{ press_item.url }}" target="_blank" rel="noopener">Read More</a>
-                    {% endif %}
+                    <a href="{{ press_item.external_url }}" target="_blank" rel="noopener">Read More</a>
                 </article>
                 {% endfor %}
             </div>
