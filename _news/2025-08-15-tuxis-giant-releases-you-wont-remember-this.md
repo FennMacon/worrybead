@@ -1,7 +1,8 @@
 ---
-title: "Tuxis Giant Releases \"You Won't Remember This\""
-date: 2025-08-15T00:00:00Z
-description: "The highly anticipated new album from Tuxis Giant is now available, exploring themes of gender, memory, and growing into yourself."
-link: "https://tuxisgiant.bandcamp.com/album/you-wont-remember-this"
-link_text: "Listen Now"
---- 
+title: Tuxis Giant Announces "You Won't Remember This"
+date: 2025-08-15T20:00:00.000Z
+description: The new album from Tuxis Giant, exploring themes of gender, memory,
+  and growing into yourself, will be released on August 15th, 2025.
+link: https://tuxisgiant.bandcamp.com/album/you-wont-remember-this
+link_text: Listen Now
+---
