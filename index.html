@@ -96,7 +96,11 @@ layout: default
                     {% if press_item.excerpt %}
                     <p>{{ press_item.excerpt }}</p>
                     {% endif %}
-                    <a href="{{ press_item.url }}" target="_blank">Read More</a>
+                    {% if press_item.url contains "http" %}
+                    <a href="{{ press_item.url }}" target="_blank" rel="noopener">Read More</a>
+                    {% else %}
+                    <a href="https://{{ press_item.url }}" target="_blank" rel="noopener">Read More</a>
+                    {% endif %}
                 </article>
                 {% endfor %}
             </div>
