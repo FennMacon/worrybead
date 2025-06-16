@@ -1,7 +1,7 @@
 title: Worry Bead Records
 description: Independent record label based in Queens, New York
 baseurl: ""
-url: "https://your-site-name.netlify.app"
+url: "https://worrybead.netlify.app"
 
 # Build settings
 markdown: kramdown
