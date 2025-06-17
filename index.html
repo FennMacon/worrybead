@@ -213,14 +213,21 @@ layout: default
                 const rect = container.getBoundingClientRect();
                 const img = container.querySelector('.news-image');
                 
-                // Only apply parallax when container is in viewport
-                if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-                    // Calculate parallax offset based on container position
-                    const centerY = rect.top + rect.height / 2;
-                    const windowCenterY = window.innerHeight / 2;
-                    const offset = (centerY - windowCenterY) * 0.15;
+                if (!img) return;
+                
+                // Apply parallax effect throughout the viewport
+                if (rect.bottom >= -100 && rect.top <= window.innerHeight + 100) {
+                    // Calculate scroll progress: 0 when container top hits bottom of screen, 1 when container bottom hits top of screen
+                    const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
                     
-                    img.style.transform = `translateY(${offset}px)`;
+                    // Convert to parallax offset (20% movement range for the extra 20% height)
+                    const maxOffset = 20; // 20% of container height
+                    const offset = (scrollProgress - 0.5) * maxOffset;
+                    
+                    img.style.transform = `translateY(${offset}%)`;
+                } else {
+                    // Reset position when out of extended viewport
+                    img.style.transform = 'translateY(0%)';
                 }
             });
         }
