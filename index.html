@@ -79,17 +79,19 @@ layout: default
             <div class="videos-grid">
                 {% for video in site.videos %}
                 <div class="video-card">
-                    <h3>{{ video.artist }} - "{{ video.song }}"{% if video.title contains "(Interactive)" %} (Interactive){% endif %}</h3>
-                    <div class="video-description">{{ video.description | markdownify }}</div>
-                    {% if video.video_type == "youtube" %}
-                    <div class="video-embed">
-                        {{ video.youtube_embed }}
+                    <div class="video-content">
+                        <h3>{{ video.artist }} - "{{ video.song }}"{% if video.title contains "(Interactive)" %} (Interactive){% endif %}</h3>
+                        <div class="video-description">{{ video.description | markdownify }}</div>
                     </div>
-                    {% elsif video.video_type == "interactive" %}
-                    <div class="video-link">
+                    <div class="video-actions">
+                        {% if video.video_type == "youtube" %}
+                        <div class="video-embed">
+                            {{ video.youtube_embed }}
+                        </div>
+                        {% elsif video.video_type == "interactive" %}
                         <a href="{{ video.interactive_link }}" target="_blank" class="experience-button">{{ video.button_text }}</a>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
                 {% endfor %}
             </div>

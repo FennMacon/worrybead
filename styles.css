@@ -233,6 +233,7 @@ h2::after {
 
 .release-actions {
     margin-top: auto;
+    text-align: center;
 }
 
 .latest-single,
@@ -246,7 +247,6 @@ h2::after {
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
-    border-radius: 8px;
     margin-bottom: 1.5rem;
     background: #000;
     box-shadow: var(--shadow-light);
@@ -286,7 +286,7 @@ h2::after {
     text-decoration: none;
     border-radius: 25px;
     transition: opacity 0.2s ease;
-    margin-top: 1.5rem;
+    margin: 1.5rem auto 0;
     text-align: center;
     font-weight: 600;
     font-size: 0.9rem;
@@ -372,7 +372,7 @@ h2::after {
 }
 
 .news-image:hover {
-    transform: scale(1.02);
+    /* Remove hover scale effect */
 }
 
 .news-content {
@@ -491,6 +491,8 @@ h2::after {
 }
 
 .video-card {
+    display: flex;
+    flex-direction: column;
     background: var(--background-card);
     border-radius: 12px;
     overflow: hidden;
@@ -510,27 +512,21 @@ h2::after {
     background-clip: text;
 }
 
+.video-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+}
+
 .video-description {
-    padding: 0 1.5rem 1.5rem;
     color: var(--text-light);
     line-height: 1.6;
+    margin-top: 1rem;
 }
 
-.video-link {
-    display: block;
-    color: var(--accent-primary);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 1rem 1.5rem;
-    background: var(--background-light);
-    margin: 1rem;
-    border-radius: 6px;
+.video-actions {
+    margin-top: auto;
     text-align: center;
-    transition: background-color 0.2s ease;
-}
-
-.video-link:hover {
-    background-color: rgba(85, 205, 252, 0.1);
+    padding: 0 1.5rem 1.5rem;
 }
 
 .experience-button {
