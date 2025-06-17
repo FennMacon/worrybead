@@ -40,11 +40,13 @@ layout: default
                     <div class="news-content">
                         <div class="news-date">{{ news_item.date | date: "%B %d, %Y" }}</div>
                         <h3>{{ news_item.title }}</h3>
+                        {% if news_item.description %}
                         <p>{{ news_item.description }}</p>
+                        {% endif %}
                         {% if news_item.body %}
                         <div class="news-body">{{ news_item.body | markdownify }}</div>
                         {% endif %}
-                        {% if news_item.link %}
+                        {% if news_item.link and news_item.link != "" %}
                         <a href="{{ news_item.link }}" target="_blank" class="news-link">{{ news_item.link_text | default: "Read More" }}</a>
                         {% endif %}
                     </div>
