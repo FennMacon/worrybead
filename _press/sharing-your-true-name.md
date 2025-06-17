@@ -6,4 +6,5 @@ excerpt: An essay on magic, vulnerability, and the radical courage of trans
   Emergency Project.
 external_url: https://atwoodmagazine.com/essay-sharing-your-true-name-matt-oconnor/
 date: 2025-05-01T12:00:00.000Z
+release_tag: true-names-benefit
 ---
