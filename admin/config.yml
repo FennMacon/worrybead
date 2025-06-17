@@ -15,10 +15,10 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
       - {label: "Featured Image", name: "image", widget: "image", required: false, hint: "Optional image for the news post"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Optional additional content with image support"}
       - {label: "Link", name: "link", widget: "string", required: false}
-      - {label: "Link Text", name: "link_text", widget: "string", default: "Read More"}
+      - {label: "Link Text", name: "link_text", widget: "string", default: "Read More", required: false}
 
   - name: "releases"
     label: "Releases"
