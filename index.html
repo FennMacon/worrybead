@@ -63,10 +63,12 @@ layout: default
                         <p class="release-date">{{ release.date | date: "%B %d, %Y" }}</p>
                         <div class="release-description">{{ release.description | markdownify }}</div>
                     </div>
-                    <div class="bandcamp-embed">
-                        {{ release.bandcamp_embed }}
+                    <div class="release-actions">
+                        <div class="bandcamp-embed">
+                            {{ release.bandcamp_embed }}
+                        </div>
+                        <a href="{{ release.bandcamp_url }}" target="_blank" class="button">View on Bandcamp</a>
                     </div>
-                    <a href="{{ release.bandcamp_url }}" target="_blank" class="button">View on Bandcamp</a>
                 </div>
                 {% endfor %}
             </div>
@@ -99,12 +101,16 @@ layout: default
                 {% assign sorted_press = site.press | sort: 'date' | reverse %}
                 {% for press_item in sorted_press %}
                 <article class="press-item">
-                    <h3>{{ press_item.publication }}</h3>
-                    <p><strong>{{ press_item.title }}</strong></p>
-                    {% if press_item.excerpt %}
-                    <p class="press-excerpt">{{ press_item.excerpt }}</p>
-                    {% endif %}
-                    <a href="{{ press_item.external_url }}" target="_blank" rel="noopener">Read More</a>
+                    <div class="press-content">
+                        <h3>{{ press_item.publication }}</h3>
+                        <p><strong>{{ press_item.title }}</strong></p>
+                        {% if press_item.excerpt %}
+                        <p class="press-excerpt">{{ press_item.excerpt }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="press-actions">
+                        <a href="{{ press_item.external_url }}" target="_blank" rel="noopener">Read More</a>
+                    </div>
                 </article>
                 {% endfor %}
             </div>

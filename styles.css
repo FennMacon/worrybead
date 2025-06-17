@@ -228,6 +228,11 @@ h2::after {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.release-actions {
+    margin-top: auto;
 }
 
 .latest-single,
@@ -409,6 +414,8 @@ h2::after {
 }
 
 .press-item {
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     background: var(--background-card);
     border-radius: 12px;
@@ -463,6 +470,15 @@ h2::after {
     font-style: italic !important;
     font-weight: normal !important;
     margin-bottom: 1rem;
+}
+
+.press-content {
+    flex-grow: 1;
+}
+
+.press-actions {
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 /* Videos Section */
