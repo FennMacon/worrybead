@@ -457,15 +457,12 @@ h2::after {
     color: var(--accent-secondary);
 }
 
-.press-excerpt p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    font-style: italic;
+.press-excerpt {
+    color: var(--text-light) !important;
+    font-size: 0.95rem !important;
+    font-style: italic !important;
+    font-weight: normal !important;
     margin-bottom: 1rem;
-}
-
-.press-excerpt p:last-child {
-    margin-bottom: 0;
 }
 
 /* Videos Section */
