@@ -18,7 +18,7 @@ collections:
       - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Optional additional content with image support"}
       - {label: "Link", name: "link", widget: "string", required: false}
-      - {label: "Link Text", name: "link_text", widget: "string", default: "Read More", required: false}
+      - {label: "Link Text", name: "link_text", widget: "string", required: false}
 
   - name: "releases"
     label: "Releases"
