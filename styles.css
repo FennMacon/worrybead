@@ -551,13 +551,15 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 870px) {
+    .logo-text {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-links {
         gap: 1.5rem;
-    }
-
-    .logo-text {
-        display: none;
     }
 
     main {
