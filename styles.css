@@ -432,13 +432,13 @@ h2::after {
 
 .news-image {
     width: 100%;
-    height: 140%;
+    height: 100%;
     object-fit: cover;
     object-position: center center;
     position: absolute;
     top: 0;
     left: 0;
-    transform: translateY(-20%);
+    transform: none;
     transform-style: preserve-3d;
     will-change: transform;
     transition: none;
