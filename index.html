@@ -213,19 +213,16 @@ layout: default
                 const rect = container.getBoundingClientRect();
                 const img = container.querySelector('.news-image');
                 
-                // Only apply parallax when container is in viewport
-                if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-                    // Calculate parallax offset based on container position
-                    const centerY = rect.top + rect.height / 2;
-                    const windowCenterY = window.innerHeight / 2;
-                    const offset = (centerY - windowCenterY) * 0.1;
-                    
-                    // Combine centering transform with parallax offset
-                    img.style.transform = `translate(-50%, -50%) translateY(${offset}px)`;
-                } else {
-                    // Ensure image stays centered when not in viewport
-                    img.style.transform = `translate(-50%, -50%)`;
-                }
+                // Calculate parallax offset based on container position
+                const centerY = rect.top + rect.height / 2;
+                const windowCenterY = window.innerHeight / 2;
+                const offset = (centerY - windowCenterY) * 0.08;
+                
+                // Apply parallax movement starting from centered position (-20%)
+                const baseOffset = -20; // Start showing center of image
+                const finalOffset = baseOffset + offset;
+                
+                img.style.transform = `translateY(${finalOffset}%)`;
             });
         }
 
