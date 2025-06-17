@@ -18,6 +18,7 @@ collections:
       - {label: "Body", name: "body", widget: "markdown", hint: "Main content for the news post with markdown support"}
       - {label: "Link", name: "link", widget: "string", required: false}
       - {label: "Link Text", name: "link_text", widget: "string", required: false}
+      - {label: "Release Tag", name: "release_tag", widget: "string", required: false, hint: "Connect this news to a specific release (e.g., 'you-wont-remember-this')"}
 
   - name: "releases"
     label: "Releases"
@@ -32,6 +33,7 @@ collections:
       - {label: "Bandcamp Embed Code", name: "bandcamp_embed", widget: "text", hint: "Paste the full iframe embed code from Bandcamp"}
       - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Release Tag", name: "release_tag", widget: "string", hint: "Unique identifier for this release (e.g., 'you-wont-remember-this'). This will be used to connect related content."}
 
   - name: "videos"
     label: "Videos"
@@ -47,6 +49,7 @@ collections:
       - {label: "YouTube Embed Code", name: "youtube_embed", widget: "text", required: false, hint: "For YouTube videos only"}
       - {label: "Interactive Link", name: "interactive_link", widget: "string", required: false, hint: "For interactive experiences only"}
       - {label: "Button Text", name: "button_text", widget: "string", default: "Watch Video", required: false}
+      - {label: "Release Tag", name: "release_tag", widget: "string", required: false, hint: "Connect this video to a specific release (e.g., 'you-wont-remember-this')"}
 
   - name: "press"
     label: "Press"
@@ -59,6 +62,7 @@ collections:
       - {label: "Excerpt/Blurb", name: "excerpt", widget: "text", hint: "A short description or quote from the article"}
       - {label: "External URL", name: "external_url", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Release Tag", name: "release_tag", widget: "string", required: false, hint: "Connect this press to a specific release (e.g., 'you-wont-remember-this')"}
 
   - name: "pages"
     label: "Pages"

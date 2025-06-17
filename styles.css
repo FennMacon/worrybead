@@ -139,6 +139,64 @@ nav {
     display: block;
 }
 
+/* Filter Section */
+.filter-section {
+    margin: 3rem 0 2rem;
+    padding: 2rem;
+    background: var(--background-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-light);
+    text-align: center;
+}
+
+.filter-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--accent-primary);
+    background: transparent;
+    color: var(--accent-primary);
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: var(--shadow-medium);
+}
+
+.filter-btn.active {
+    background: var(--gradient-primary);
+    border: 2px solid transparent;
+    color: white;
+    box-shadow: var(--shadow-medium);
+}
+
 /* Main Content */
 main {
     max-width: 1200px;
@@ -706,5 +764,26 @@ footer {
     .news-item,
     .press-item {
         padding: 1.5rem;
+    }
+
+    /* Filter section mobile styles */
+    .filter-section {
+        margin: 2rem 0 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .filter-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+        margin: 0.25rem;
+    }
+
+    .filter-buttons {
+        gap: 0.5rem;
     }
 } 

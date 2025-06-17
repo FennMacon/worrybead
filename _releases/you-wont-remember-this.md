@@ -12,4 +12,5 @@ bandcamp_embed: "<iframe style=\"border: 0; width: 100%; height: 470px;\"
   Won\\'t Remember This by Tuxis Giant</a></iframe>"
 bandcamp_url: https://tuxisgiant.bandcamp.com/album/you-wont-remember-this
 featured: true
+release_tag: you-wont-remember-this
 ---

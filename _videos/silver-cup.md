@@ -12,4 +12,5 @@ youtube_embed: <iframe width="100%" height="315"
   clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 button_text: Watch Video
+release_tag: you-wont-remember-this
 ---

@@ -24,15 +24,27 @@ layout: default
             <img src="img/banner.jpeg" alt="Worry Bead Records Banner" class="banner">
         </section>
 
+        <!-- Release Filter Bar -->
+        <section class="filter-section">
+            <h3>Filter by Release</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Content</button>
+                {% assign releases_with_tags = site.releases | where_exp: "release", "release.release_tag != nil and release.release_tag != ''" | sort: 'date' | reverse %}
+                {% for release in releases_with_tags %}
+                <button class="filter-btn" data-filter="{{ release.release_tag }}">{{ release.title }}</button>
+                {% endfor %}
+            </div>
+        </section>
+
         <section id="news" class="section">
             <h2>News</h2>
             <div class="news-grid">
                 {% assign sorted_news = site.news | sort: 'date' | reverse %}
                 {% for news_item in sorted_news %}
                 {% if forloop.first %}
-                <article class="news-item featured">
+                <article class="news-item featured" data-release-tag="{{ news_item.release_tag | default: 'untagged' }}">
                 {% else %}
-                <article class="news-item">
+                <article class="news-item" data-release-tag="{{ news_item.release_tag | default: 'untagged' }}">
                 {% endif %}
                     {% if news_item.image %}
                     <div class="news-image-container">
@@ -59,7 +71,7 @@ layout: default
             <div class="releases-grid">
                 {% assign sorted_releases = site.releases | sort: 'date' | reverse %}
                 {% for release in sorted_releases %}
-                <div class="release-card">
+                <div class="release-card" data-release-tag="{{ release.release_tag | default: 'untagged' }}">
                     <div class="release-content">
                         <h3>{{ release.title }}</h3>
                         <p class="release-date">{{ release.date | date: "%B %d, %Y" }}</p>
@@ -80,7 +92,7 @@ layout: default
             <h2>Videos</h2>
             <div class="videos-grid">
                 {% for video in site.videos %}
-                <div class="video-card">
+                <div class="video-card" data-release-tag="{{ video.release_tag | default: 'untagged' }}">
                     <div class="video-content">
                         <h3>{{ video.artist }} - "{{ video.song }}"{% if video.title contains "(Interactive)" %} (Interactive){% endif %}</h3>
                         <div class="video-description">{{ video.description | markdownify }}</div>
@@ -104,7 +116,7 @@ layout: default
             <div class="press-grid">
                 {% assign sorted_press = site.press | sort: 'date' | reverse %}
                 {% for press_item in sorted_press %}
-                <article class="press-item">
+                <article class="press-item" data-release-tag="{{ press_item.release_tag | default: 'untagged' }}">
                     <div class="press-content">
                         <h3>{{ press_item.publication }}</h3>
                         <p><strong>{{ press_item.title }}</strong></p>
@@ -144,6 +156,53 @@ layout: default
     </footer>
 
     <script>
+        // Release filtering functionality
+        function initializeFiltering() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const contentItems = document.querySelectorAll('[data-release-tag]');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Show/hide content based on filter
+                    contentItems.forEach(item => {
+                        const itemTag = item.getAttribute('data-release-tag');
+                        
+                        if (filterValue === 'all' || itemTag === filterValue) {
+                            item.style.display = '';
+                            item.classList.remove('filtered-out');
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.add('filtered-out');
+                        }
+                    });
+
+                    // Hide empty sections
+                    updateSectionVisibility();
+                });
+            });
+        }
+
+        function updateSectionVisibility() {
+            const sections = ['news', 'releases', 'videos', 'press'];
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                const visibleItems = section.querySelectorAll('[data-release-tag]:not(.filtered-out)');
+                
+                if (visibleItems.length === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = '';
+                }
+            });
+        }
+
         // Parallax effect for news images
         function updateParallax() {
             const containers = document.querySelectorAll('.news-image-container');
@@ -174,8 +233,13 @@ layout: default
             }
         }
 
+        // Initialize everything when page loads
+        window.addEventListener('load', () => {
+            initializeFiltering();
+            updateParallax();
+        });
+        
         window.addEventListener('scroll', requestTick);
-        window.addEventListener('load', updateParallax);
         window.addEventListener('resize', updateParallax);
     </script>
 </body>
