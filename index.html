@@ -35,7 +35,9 @@ layout: default
                 <article class="news-item">
                 {% endif %}
                     {% if news_item.image %}
-                    <img src="{{ news_item.image }}" alt="{{ news_item.title }}" class="news-image">
+                    <div class="news-image-container">
+                        <img src="{{ news_item.image }}" alt="{{ news_item.title }}" class="news-image">
+                    </div>
                     {% endif %}
                     <div class="news-content">
                         <div class="news-date">{{ news_item.date | date: "%B %d, %Y" }}</div>
@@ -144,16 +146,20 @@ layout: default
     <script>
         // Parallax effect for news images
         function updateParallax() {
-            const images = document.querySelectorAll('.news-image');
+            const containers = document.querySelectorAll('.news-image-container');
             
-            images.forEach(img => {
-                const rect = img.getBoundingClientRect();
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
+            containers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                const img = container.querySelector('.news-image');
                 
-                // Only apply parallax when image is in viewport
+                // Only apply parallax when container is in viewport
                 if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-                    img.style.transform = `translateY(${rate * 0.1}px)`;
+                    // Calculate parallax offset based on container position
+                    const centerY = rect.top + rect.height / 2;
+                    const windowCenterY = window.innerHeight / 2;
+                    const offset = (centerY - windowCenterY) * 0.15;
+                    
+                    img.style.transform = `translateY(${offset}px)`;
                 }
             });
         }
@@ -170,6 +176,7 @@ layout: default
 
         window.addEventListener('scroll', requestTick);
         window.addEventListener('load', updateParallax);
+        window.addEventListener('resize', updateParallax);
     </script>
 </body>
 </html> 
