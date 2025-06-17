@@ -7,4 +7,5 @@ description: An interactive 3D experience for the song "Huey". Use WASD to move
 video_type: interactive
 interactive_link: huey.html
 button_text: Launch
+release_tag: you-wont-remember-this
 ---
