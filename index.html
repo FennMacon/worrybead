@@ -61,7 +61,7 @@ layout: default
                     <div class="release-content">
                         <h3>{{ release.title }}</h3>
                         <p class="release-date">{{ release.date | date: "%B %d, %Y" }}</p>
-                        <p class="release-description">{{ release.description }}</p>
+                        <div class="release-description">{{ release.description | markdownify }}</div>
                     </div>
                     <div class="bandcamp-embed">
                         {{ release.bandcamp_embed }}
@@ -78,7 +78,7 @@ layout: default
                 {% for video in site.videos %}
                 <div class="video-card">
                     <h3>{{ video.artist }} - "{{ video.song }}"{% if video.title contains "(Interactive)" %} (Interactive){% endif %}</h3>
-                    <p class="video-description">{{ video.description }}</p>
+                    <div class="video-description">{{ video.description | markdownify }}</div>
                     {% if video.video_type == "youtube" %}
                     <div class="video-embed">
                         {{ video.youtube_embed }}
@@ -102,8 +102,7 @@ layout: default
                     <h3>{{ press_item.publication }}</h3>
                     <p><strong>{{ press_item.title }}</strong></p>
                     {% if press_item.excerpt %}
-                    {% assign excerpt = press_item.excerpt %}
-                    <p>{{ excerpt }}</p>
+                    <div>{{ press_item.excerpt | markdownify }}</div>
                     {% endif %}
                     <a href="{{ press_item.external_url }}" target="_blank" rel="noopener">Read More</a>
                 </article>
@@ -113,7 +112,7 @@ layout: default
 
         <section id="about" class="section">
             <h2>About Worry Bead Records</h2>
-            <p>{{ site.data.about.content }}</p>
+            <div>{{ site.data.about.content | markdownify }}</div>
             <p class="art-credits">{{ site.data.about.art_credits }}</p>
         </section>
 

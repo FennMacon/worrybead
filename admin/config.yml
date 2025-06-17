@@ -28,7 +28,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Artist", name: "artist", widget: "string"}
       - {label: "Release Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Description", name: "description", widget: "markdown"}
       - {label: "Bandcamp Embed Code", name: "bandcamp_embed", widget: "text", hint: "Paste the full iframe embed code from Bandcamp"}
       - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
@@ -42,7 +42,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Artist", name: "artist", widget: "string"}
       - {label: "Song", name: "song", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Description", name: "description", widget: "markdown"}
       - {label: "Video Type", name: "video_type", widget: "select", options: ["youtube", "interactive"]}
       - {label: "YouTube Embed Code", name: "youtube_embed", widget: "text", required: false, hint: "For YouTube videos only"}
       - {label: "Interactive Link", name: "interactive_link", widget: "string", required: false, hint: "For interactive experiences only"}
@@ -56,7 +56,7 @@ collections:
     fields:
       - {label: "Publication", name: "publication", widget: "string"}
       - {label: "Article Title", name: "title", widget: "string"}
-      - {label: "Excerpt/Blurb", name: "excerpt", widget: "text", hint: "A short description or quote from the article"}
+      - {label: "Excerpt/Blurb", name: "excerpt", widget: "markdown", hint: "A short description or quote from the article"}
       - {label: "External URL", name: "external_url", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
 
@@ -67,7 +67,7 @@ collections:
         label: "About Page"
         file: "_data/about.yml"
         fields:
-          - {label: "About Text", name: "content", widget: "text"}
+          - {label: "About Text", name: "content", widget: "markdown"}
           - {label: "Art Credits", name: "art_credits", widget: "string"}
       - name: "contact"
         label: "Contact Info"
