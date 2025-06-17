@@ -298,12 +298,15 @@ h2::after {
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-auto-rows: 1fr;
     gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .news-item {
+    display: flex;
+    flex-direction: column;
     background: var(--background-card);
     padding: 2rem;
     border-radius: 12px;
@@ -371,6 +374,7 @@ h2::after {
 .news-content {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .news-body {
@@ -452,6 +456,17 @@ h2::after {
 
 .press-item a:hover {
     color: var(--accent-secondary);
+}
+
+.press-excerpt p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.press-excerpt p:last-child {
+    margin-bottom: 0;
 }
 
 /* Videos Section */

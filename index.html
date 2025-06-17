@@ -102,7 +102,7 @@ layout: default
                     <h3>{{ press_item.publication }}</h3>
                     <p><strong>{{ press_item.title }}</strong></p>
                     {% if press_item.excerpt %}
-                    <div>{{ press_item.excerpt | markdownify }}</div>
+                    <div class="press-excerpt">{{ press_item.excerpt | markdownify }}</div>
                     {% endif %}
                     <a href="{{ press_item.external_url }}" target="_blank" rel="noopener">Read More</a>
                 </article>
