@@ -44,24 +44,14 @@ layout: default
                         <h3>{{ news_item.title }}</h3>
                         {% if news_item.body %}
                         <div class="news-body">{{ news_item.body | markdownify }}</div>
+                        {% elsif news_item.content and news_item.content != "" %}
+                        <div class="news-body">{{ news_item.content }}</div>
                         {% endif %}
                         {% if news_item.link and news_item.link != "" %}
                         <a href="{{ news_item.link }}" target="_blank" class="news-link">{{ news_item.link_text | default: "Read More" }}</a>
                         {% endif %}
                     </div>
                 </article>
-                {% endfor %}
-            </div>
-        </section>
-
-        <!-- Release Filter Bar -->
-        <section class="filter-section">
-            <h3>Filter by Release</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All Content</button>
-                {% assign releases_with_tags = site.releases | where_exp: "release", "release.release_tag != nil and release.release_tag != ''" | sort: 'date' | reverse %}
-                {% for release in releases_with_tags %}
-                <button class="filter-btn" data-filter="{{ release.release_tag }}">{{ release.title }}</button>
                 {% endfor %}
             </div>
         </section>
@@ -84,6 +74,18 @@ layout: default
                         <a href="{{ release.bandcamp_url }}" target="_blank" class="button">View on Bandcamp</a>
                     </div>
                 </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Release Filter Bar -->
+        <section class="filter-section">
+            <h3>Filter by Release</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Content</button>
+                {% assign releases_with_tags = site.releases | where_exp: "release", "release.release_tag != nil and release.release_tag != ''" | sort: 'date' | reverse %}
+                {% for release in releases_with_tags %}
+                <button class="filter-btn" data-filter="{{ release.release_tag }}">{{ release.title }}</button>
                 {% endfor %}
             </div>
         </section>
