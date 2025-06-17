@@ -1,5 +1,5 @@
 ---
-title: Huey (Interactive)
+title: Huey
 artist: Tuxis Giant
 song: Huey
 description: An interactive 3D experience for the song "Huey". Use WASD to move
