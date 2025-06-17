@@ -6,4 +6,5 @@ body: |
   Tuxis hit the road to celebrate You Won't Remember This in August.
   
   ![Tuxis Giant Summer Tour Poster](/img/tg_album-tour-flyer.jpeg)
+release_tag: you-wont-remember-this
 ---

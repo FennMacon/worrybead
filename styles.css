@@ -195,6 +195,7 @@ nav {
     border: 2px solid transparent;
     color: white;
     box-shadow: var(--shadow-medium);
+    background-clip: padding-box;
 }
 
 /* Main Content */
