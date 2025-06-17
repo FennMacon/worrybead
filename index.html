@@ -246,6 +246,11 @@ layout: default
             initializeFiltering();
             updateParallax();
         });
+
+        // Apply initial parallax as soon as DOM is ready (before images fully load)
+        document.addEventListener('DOMContentLoaded', () => {
+            updateParallax();
+        });
         
         window.addEventListener('scroll', requestTick);
         window.addEventListener('resize', updateParallax);
