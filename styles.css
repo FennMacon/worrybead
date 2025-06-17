@@ -531,17 +531,20 @@ h2::after {
 
 .experience-button {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 1.5rem 3rem;
     background: var(--gradient-primary);
     color: white;
     text-decoration: none;
-    border-radius: 25px;
+    border-radius: 30px;
     font-weight: 600;
+    font-size: 1.1rem;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.05em;
     transition: opacity 0.2s ease;
     box-shadow: var(--shadow-light);
-    margin: 1rem 1.5rem 1.5rem;
+    margin: 2rem auto 0;
+    max-width: 280px;
+    width: 100%;
 }
 
 .experience-button:hover {
