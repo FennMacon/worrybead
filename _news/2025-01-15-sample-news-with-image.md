@@ -8,4 +8,4 @@ link_text: ""
 ---
 Tuxis hit the road to celebrate You Won’t Remember This in August.
 
-![Additional image](/img/tg_album-tour-flyer.jpeg)
+![Tuxis Summer Tour](/img/tg_album-tour-flyer.jpeg "Tuxis Giant Summer Tour Flyer")
