@@ -369,6 +369,8 @@ h2::after {
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-light);
     transition: transform 0.2s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .news-image:hover {
@@ -531,20 +533,19 @@ h2::after {
 
 .experience-button {
     display: inline-block;
-    padding: 1.5rem 3rem;
+    padding: 1rem 2rem;
     background: var(--gradient-primary);
     color: white;
     text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    border-radius: 25px;
     transition: opacity 0.2s ease;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
     box-shadow: var(--shadow-light);
-    margin: 2rem auto 0;
-    max-width: 280px;
-    width: 100%;
 }
 
 .experience-button:hover {

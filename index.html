@@ -140,5 +140,36 @@ layout: default
     <footer>
         <p>&copy; 2024 Worry Bead Records. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Parallax effect for news images
+        function updateParallax() {
+            const images = document.querySelectorAll('.news-image');
+            
+            images.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                // Only apply parallax when image is in viewport
+                if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+                    img.style.transform = `translateY(${rate * 0.1}px)`;
+                }
+            });
+        }
+
+        // Throttle scroll events for performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+                setTimeout(() => { ticking = false; }, 16);
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+        window.addEventListener('load', updateParallax);
+    </script>
 </body>
 </html> 
