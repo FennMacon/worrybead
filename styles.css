@@ -515,18 +515,14 @@ h2::after {
 }
 
 .social-links a {
-    display: inline-block;
-    padding: 0.75rem;
-    background: var(--gradient-accent);
-    color: white;
+    color: var(--accent-primary);
     text-decoration: none;
-    border-radius: 50%;
-    transition: opacity 0.2s ease;
-    box-shadow: var(--shadow-light);
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .social-links a:hover {
-    opacity: 0.9;
+    color: var(--accent-secondary);
 }
 
 /* Footer */
