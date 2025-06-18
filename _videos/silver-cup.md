@@ -2,9 +2,8 @@
 title: Silver Cup
 artist: Tuxis Giant
 song: Silver Cup
-description: The new single from Tuxis Giant; an exploration of gender dysphoria
-  and transformation. What if trying a new form was a magic, euphoric spell?
-  Music video by Enne Goldstein.
+description: A standout track from Tuxis Giant's upcoming album, with a video by
+  Enne Goldstein.
 video_type: youtube
 youtube_embed: <iframe width="100%" height="315"
   src="https://www.youtube.com/embed/5NtB6ECy2Ak?si=JTTBn-fMsDDBrk7S"
